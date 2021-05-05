@@ -1,10 +1,20 @@
-import React from 'react';
-const App=()=> {
+import React from "react";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
+import { Container } from "react-bootstrap";
+import HomeScreen from "./screens/HomeScreen";
+const App = () => {
   return (
-   <>
-   <h1> Welcome to </h1>
-   </>
+    <>
+      <Header />
+      <main className="py-3">
+        <Container>
+          <HomeScreen />
+        </Container>
+      </main>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
