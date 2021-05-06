@@ -1,12 +1,26 @@
-import React from "react";
+import axios from "axios";
+import React, {useState, useEffect} from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "../component/Rating";
-import products from "../products";
+//import products from "../products";
 
 function ProductScreen({ match }) {
-  const product = products.find((p) => p._id === match.params.id);
-  console.log(product);
+  //const product = products.find((p) => p._id === match.params.id);
+
+const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const res = await axios.get(`http://localhost:5000/api/products/${match.params.id}`);
+      const data = res.data;
+      console.log(data);
+      setProduct(data);
+      
+    };
+    fetchProduct();
+
+  }, [match.params.id]);
   return (
     <>
       <Link className="btn btn-dark my-m" to="/">
@@ -14,7 +28,9 @@ function ProductScreen({ match }) {
       </Link>
       <Row>
         <Col md={6}>
-          <Image src={product.image} alt={product.name}></Image>
+          <Card>
+            <Image src={product.image} alt={product.name}></Image>
+          </Card>
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">

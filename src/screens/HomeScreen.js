@@ -1,9 +1,22 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
-import products from '../products';
+
+//import products from '../products';
 import Product from '../component/Product';
 
-function HomeScreen() {
+
+const HomeScreen= () => {
+    const [products, setProducts] = useState ([]);
+    useEffect (() => {
+        const fetchProducts = async () => {
+            const res = await axios.get("http://localhost:5000/api/products");
+            const data = res.data;
+            console.log(data);
+            setProducts(data);
+        };
+        fetchProducts();
+    }, []);
     return (
         <>
         <h1>
@@ -20,6 +33,6 @@ function HomeScreen() {
             
         </>
     )
-}
+};
 
 export default HomeScreen
