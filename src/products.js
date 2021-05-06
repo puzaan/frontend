@@ -56,7 +56,7 @@ const products = [
       updatedAt: "2021-04-09T11:01:18.605Z",
     },
     {
-      rating: 4,
+      rating: 4.5,
       numReviews: 1,
       price: 799.5,
       countInStock: 2,
@@ -84,8 +84,8 @@ const products = [
       updatedAt: "2021-04-09T11:01:58.121Z",
     },
     {
-      rating: 0,
-      numReviews: 0,
+      rating: 2.5,
+      numReviews: 1,
       price: 12.99,
       countInStock: 6,
       _id: "606dda21230ce54d2acc4f5e",
@@ -102,8 +102,8 @@ const products = [
       updatedAt: "2021-04-09T10:54:41.164Z",
     },
     {
-      rating: 0,
-      numReviews: 0,
+      rating: 4.5,
+      numReviews: 1,
       price: 3.99,
       countInStock: 15,
       _id: "606dda21230ce54d2acc4f5f",
@@ -119,8 +119,8 @@ const products = [
       updatedAt: "2021-04-09T10:59:08.977Z",
     },
     {
-      rating: 0,
-      numReviews: 0,
+      rating: 5,
+      numReviews: 1,
       price: 19.99,
       countInStock: 0,
       _id: "606dda21230ce54d2acc4f60",
@@ -137,8 +137,8 @@ const products = [
       updatedAt: "2021-04-09T11:00:49.556Z",
     },
     {
-      rating: 0,
-      numReviews: 0,
+      rating: 0.5,
+      numReviews: 1,
       price: 0,
       countInStock: 0,
       _id: "607046e1fd5da503cb0c48fa",
