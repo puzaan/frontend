@@ -2,18 +2,23 @@ import React, { useEffect } from "react";
 import { Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../actions/cartAction";
-import Message from "../component/Message";
+import { addToCart } from "../actions/cartAction.js";
+import Message from "../component/Message.js";
 
 const CartScreen = ({ match }) => {
     const productId = match.params.id;
+
+    console.log(productId);
+
     const dispatch = useDispatch();
+
     const cart = useSelector((state) => state.cart);
 
     const { cartItems } = cart;
+
     useEffect(() => {
         if (productId) {
-            dispatch(addToCart(productId, 2));
+            dispatch(addToCart(productId, 1));
         }
     }, [dispatch, productId]);
 
@@ -23,8 +28,7 @@ const CartScreen = ({ match }) => {
                 <h1>Shopping Cart</h1>
                 {cartItems.length === 0 ? (
                     <Message>
-                        Your cart is Empty
-                        <Link to="/">Go Back</Link>
+                        You Cart is Empty <Link to="/">Go Back</Link>
                     </Message>
                 ) : (
                     <ListGroup variant="flush">
@@ -36,16 +40,21 @@ const CartScreen = ({ match }) => {
                                             src={item.image}
                                             lat={item.name}
                                             fluid
-                                            roundedCircle
+                                            rounded
                                         ></Image>
                                     </Col>
+
                                     <Col md={3}>
-                                        <Link to={`/product/${item.product}`}> {item.name}</Link>
+                                        <Link to={`/product/${item.product}`}>
+                                            {item.name}
+                                        </Link>
                                     </Col>
-                                    <Col md={2}> ${item.price}</Col>
+
+                                    <Col md={2}>${item.price}</Col>
+
                                     <Col md={2}>
                                         <Form.Control
-                                            as="Select"
+                                            as="select"
                                             value={item.qty}
                                             onChange={(e) =>
                                                 dispatch(
@@ -53,13 +62,11 @@ const CartScreen = ({ match }) => {
                                                 )
                                             }
                                         >
-                                            {item.qty}
-
-                                            {[...Array(item.countInStock).keys()].map((x) => {
+                                            {[...Array(item.countInStock).keys()].map((x) => (
                                                 <option key={x + 1} value={x + 1}>
                                                     {x + 1}
-                                                </option>;
-                                            })}
+                                                </option>
+                                            ))}
                                         </Form.Control>
                                     </Col>
                                 </Row>

@@ -6,7 +6,6 @@ import App from './App';
 import "./bootstrap.min.css";
 import store from './store';
 import reportWebVitals from './reportWebVitals';
-import { Form } from 'react-bootstrap';
 
 ReactDOM.render(
   <Provider store= {store}>
