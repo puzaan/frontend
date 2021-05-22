@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
-import { Col, Form, Image, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../actions/cartAction.js";
+import { addToCart, removeFromCart } from "../actions/cartAction.js";
 import Message from "../component/Message.js";
 
-const CartScreen = ({ match }) => {
+const CartScreen = ({ match, history, location }) => {
     const productId = match.params.id;
+
+
+
+    const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+
 
     console.log(productId);
 
@@ -15,12 +20,19 @@ const CartScreen = ({ match }) => {
     const cart = useSelector((state) => state.cart);
 
     const { cartItems } = cart;
-
+    console.log(location)
     useEffect(() => {
+
         if (productId) {
-            dispatch(addToCart(productId, 1));
+            dispatch(addToCart(productId, qty));
         }
-    }, [dispatch, productId]);
+    }, [dispatch, productId, qty]);
+
+
+    const removeFromCartHandler = (productId) => {
+        dispatch(removeFromCart(productId));
+
+    };
 
     return (
         <Row>
@@ -69,12 +81,23 @@ const CartScreen = ({ match }) => {
                                             ))}
                                         </Form.Control>
                                     </Col>
+                                    <Col md={2}>
+                                        <Button
+                                            type="button"
+                                            variant="light"
+                                            onClick={() => removeFromCartHandler(item.product)}
+                                        >
+                                            <i className="fas fa-trash"></i>
+                                        </Button>
+                                    </Col>
                                 </Row>
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
                 )}
             </Col>
+
+
         </Row>
     );
 };
