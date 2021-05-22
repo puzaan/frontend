@@ -1,5 +1,5 @@
-import React, { useEffect , useState} from "react";
-import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Col, Image, ListGroup, Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "../component/Rating";
 import { useDispatch, useSelector } from 'react-redux'
@@ -84,9 +84,39 @@ const ProductScreen = ({ history, match }) => {
                   </Col>
                 </Row>
               </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Col>Choose quantity:</Col>
+                  <Col>
+                  
+
+                  <Form.Control
+                    as="select"
+                    value={product.qty}
+                    onChange= {
+                      (e) => {
+                        setQty(Number(e.target.value))
+                      }
+                    }
+                    >
+
+                    {[...Array(product.countInStock).keys()].map((x) => (
+                      <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                      </option>
+                    ))}
+                  </Form.Control>
+                  </Col>
+
+                </Row>
+              </ListGroup.Item>
+
+
+
               <ListGroup.Item>
                 <Button
-                onClick= {addToCartHandler}
+                  onClick={addToCartHandler}
                   className="btn-block"
                   type="button"
                   disabled={product.countInStock === 0}
